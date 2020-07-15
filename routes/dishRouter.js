@@ -88,10 +88,6 @@ dishRouter.route('/:dishId')
 });
 
 
-
-//COPIED
-
-
 dishRouter.route('/:dishId/comments')
 .get((req, res, next) => {
     Dishes.findById(req.params.dishId)
