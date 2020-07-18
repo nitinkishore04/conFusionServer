@@ -3,21 +3,15 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 const Schema = mongoose.Schema;
+var passportLocalMangoose = require('passport-local-mongoose');
 
 var User = new Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
     admin: {
         type: Boolean,
         default: false
     }
 });
+
+User.plugin(passportLocalMangoose);
 
 module.exports = mongoose.model('User', User);
