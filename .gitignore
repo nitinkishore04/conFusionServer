@@ -1,3 +1,6 @@
 node_modules
 sessions
 bin
+public/index.html
+authenticate.js
+config.js
