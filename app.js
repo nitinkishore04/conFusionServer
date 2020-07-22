@@ -5,11 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
+const cors = require('cors');
 
 var passport = require('passport');
 var authenticate = require('./authenticate');
 
 var config = require('./config');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -39,7 +41,6 @@ connect.then((db) => {
 });
 
 var app = express();
-
 app.all('*', (req, res, next) => {
   if(req.secure){
     return next();
@@ -53,11 +54,17 @@ app.all('*', (req, res, next) => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+
+app.use(cors());
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('12345-67890-09876-54321'));
 app.use(passport.initialize());
+
+
 
 
 
